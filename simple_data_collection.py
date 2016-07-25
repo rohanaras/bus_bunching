@@ -82,7 +82,7 @@ if __name__ == "__main__":
     date_string = date.strftime("%Y%m%d-%H%M")
     wait_time = 1
     next_checkpoint = wait_time
-    with open('data/oba_dat-r%s-%s.csv' % (args.routes, date_string), 'w') as f:
+    with open('data/oba_dat-r%s-%s.csv' % ('_'.join(args.routes), date_string), 'w') as f:
         header = True
         while datetime.datetime.now() - date < datetime.timedelta(hours=args.num_hours):
             df = pd.DataFrame([get_trip_data(trip_id, route_num) for route_num in route_ids
