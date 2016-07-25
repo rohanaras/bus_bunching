@@ -40,8 +40,11 @@ def get_trip_data(trip_str, route_num):
     select_data['distance_traveled'] = trip_status['distanceAlongTrip']
     select_data['total_trip_distance'] = trip_status['totalDistanceAlongTrip']
 
-    next_stop_idx = next(index for (index, x) in enumerate(raw_data['data']['entry']['schedule']['stopTimes'])
-                                    if x['stopId'] == trip_status['nextStop']) - 1
+    try:
+        next_stop_idx = next(index for (index, x) in enumerate(raw_data['data']['entry']['schedule']['stopTimes'])
+                                        if x['stopId'] == trip_status['nextStop']) - 1
+    except StopIteration:
+        next_stop_idx = len(raw_data['data']['entry']['schedule']['stopTimes']) - 1
     if next_stop_idx > 0:
         select_data['last_stop'] = raw_data['data']['entry']['schedule']['stopTimes'][next_stop_idx]['stopId']
 
