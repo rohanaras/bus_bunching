@@ -55,3 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# jetbrains stuff
+.idea/
+.DS_Store
